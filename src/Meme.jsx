@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import IMAGE_DATA from "./assets/meme.json";
+import Draggable from "react-draggable";
 
 const Meme = () => {
   const [img, setImg] = useState("");
@@ -44,8 +45,6 @@ const Meme = () => {
     setTextsPosition({
       ...textPosition,
       text1: textsData.text1,
-      text2: textsData.text2,
-      text3: textsData.text3,
       positionX: e.clientX,
       positionY: e.clientY,
     });
@@ -59,16 +58,18 @@ const Meme = () => {
 
   const Text = ({ text, positionY, positionX }) => {
     return (
-      <div
-        className="font-impact text-5xl font-extrabold leading-9 tracking-normal text-black z-50"
-        style={{
-          position: "absolute",
-          top: positionY,
-          left: positionX,
-        }}
-      >
-        {text}
-      </div>
+      <Draggable>
+        <div
+          className="font-impact text-3xl font-extrabold leading-9 tracking-normal text-black z-50"
+          style={{
+            position: "absolute",
+            top: positionY,
+            left: positionX,
+          }}
+        >
+          {text}
+        </div>
+      </Draggable>
     );
   };
 
@@ -136,11 +137,6 @@ const Meme = () => {
             ></Text>
           );
         })}
-        {/* <Text
-          text={textPosition.text1}
-          positionX={textPosition.positionX}
-          positionY={textPosition.positionY}
-        ></Text> */}
       </div>
     </div>
   );
